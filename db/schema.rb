@@ -11,16 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626141109) do
+ActiveRecord::Schema.define(version: 20150626172501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
   create_table "gists", force: :cascade do |t|
-    t.string    "hex",                                                              null: false
-    t.json      "content",                                                          null: false
-    t.geography "lonlat",  limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.string    "hex",                                                                  null: false
+    t.json      "content",                                                              null: false
+    t.geography "lonlat",      limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.string    "title"
+    t.text      "description"
   end
 
   add_index "gists", ["hex"], name: "index_gists_on_hex", using: :btree

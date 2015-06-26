@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require bootsy
  *= require_self
  */
 
@@ -33,5 +34,9 @@
 }
 
 .panel-body {
+    padding: 0px;
+}
+
+body.bootsy {
     padding: 0px;
 }

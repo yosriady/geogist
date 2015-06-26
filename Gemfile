@@ -6,6 +6,10 @@ gem 'rails', '4.2.1'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
+# Forms
+gem 'simple_form'
+gem 'bootsy'
+
 # Utility
 gem 'json'
 
