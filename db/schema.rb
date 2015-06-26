@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 20150626141109) do
   enable_extension "postgis"
 
   create_table "gists", force: :cascade do |t|
-    t.string    "hash",                                                             null: false
+    t.string    "hex",                                                              null: false
     t.json      "content",                                                          null: false
     t.geography "lonlat",  limit: {:srid=>4326, :type=>"point", :geographic=>true}
   end
 
-  add_index "gists", ["hash"], name: "index_gists_on_hash", using: :btree
+  add_index "gists", ["hex"], name: "index_gists_on_hex", using: :btree
 
 end
