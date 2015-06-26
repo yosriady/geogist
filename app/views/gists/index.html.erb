@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
   <h1>Listing Gists</h1>
-  <%= link_to 'New Gist', new_gist_path %>
+  <%= link_to new_gist_path, class: 'btn btn-success' do %><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Gist<% end %>
 
   <table>
     <thead>
@@ -26,8 +26,6 @@
   <hr>
 
   <div class="panel panel-default">
-    <div class="panel-heading">Panel heading</div>
-
     <div class="panel-body">
       <div id='map' class='large'></div>
       <script>

@@ -13,6 +13,6 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require jquery.bsAlerts.min.js
 //= require bootsy
-//= require turbolinks
 //= require_tree .
