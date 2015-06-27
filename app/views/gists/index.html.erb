@@ -9,7 +9,7 @@
   <% @gists.each do |gist| %>
     <%= render 'gist', gist: gist %>
     <tr>
-      <td><%= link_to 'Show', gist %></td>
+      <td><%= link_to 'Show', gist_path(gist.hex) %></td>
       <td><%= link_to 'Edit', edit_gist_path(gist) %></td>
       <td><%= link_to 'Destroy', gist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
