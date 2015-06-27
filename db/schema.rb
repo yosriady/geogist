@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626172501) do
+ActiveRecord::Schema.define(version: 20150627084615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20150626172501) do
     t.geography "lonlat",      limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.string    "title"
     t.text      "description"
+    t.datetime  "created_at",                                                           null: false
+    t.datetime  "updated_at",                                                           null: false
   end
 
   add_index "gists", ["hex"], name: "index_gists_on_hex", using: :btree

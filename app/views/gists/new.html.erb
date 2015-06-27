@@ -7,13 +7,12 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <div id='map' class='large'></div>
-        <%= javascript_include_tag "new" %>
       </div>
       <ul class="list-group">
           <li class="list-group-item">
             <div data-alerts="alerts"></div>
             <%= simple_form_for @gist do |f| %>
-            <%= f.input :content, as: :text, label: 'GeoJSON', input_html: { rows: 8 } %>
+            <%= f.input :content, as: :text, label: 'Enter GeoJSON', input_html: { rows: 10 } %>
            </li>
            <li class="list-group-item">
             <%= f.input :description, as: :bootsy, input_html: { rows: 5 }, editor_options: { alert_unsaved: false } %>
@@ -27,3 +26,55 @@
     </div>
   </div>
 </div>
+
+<script>
+$( document ).ready(function() {
+    L.mapbox.accessToken = 'pk.eyJ1IjoibGV2ZW50aGFuIiwiYSI6IjNYYi1uMnMifQ.uQvHEvixml-zaHJZhb_WNQ';
+    var mapOptions = {
+        attributionControl: {compact: true}
+    }
+    var map = L.mapbox.map('map', 'mapbox.streets', mapOptions)
+        .setView([40, -74.50], 2);
+
+    $("#gist_content").on('focusout',function(event){
+        try {
+            var geojson = $.parseJSON(event.target.value);
+        } catch (error) {
+            errorMessage(error);
+        }
+
+        // Load and fit valid geoJSON
+        var featureLayer =  L.mapbox.featureLayer()
+            .setGeoJSON(geojson)
+            .addTo(map);
+        map.fitBounds(featureLayer.getBounds());
+        successMessage();
+    });
+
+    // Initialize CodeMirror
+    var myCodeMirror = CodeMirror.fromTextArea($("#gist_content")[0], {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: {
+            name: "javascript",
+            json: true
+        }
+    });
+
+    // Helpers
+    function successMessage(){
+        $(document).trigger("clear-alerts");
+        $(document).trigger("add-alerts", {
+          message: "GeoJSON loaded succesfully!",
+          priority: "success"
+        });
+    }
+
+    function errorMessage(err){
+        $(document).trigger("add-alerts", {
+          message: "Invalid GeoJSON! " + err,
+          priority: "error"
+        });
+    }
+});
+</script>

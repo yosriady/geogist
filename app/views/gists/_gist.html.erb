@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="map-<%= gist.hex %>" class='map large'></div>
+    </div>
+    <ul class="list-group">
+        <% if gist.description? %>
+        <li class="list-group-item">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> <%= gist.description.html_safe %>
+        </li>
+        <% end %>
+        <li class="list-group-item">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Last Updated <%= gist.updated_at.strftime('%d %B %Y') %>
+        </li>
+    </ul>
+</div>

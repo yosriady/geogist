@@ -4,42 +4,21 @@
   <div class="col-md-8 col-md-offset-2">
   <h1>Listing Gists</h1>
   <%= link_to new_gist_path, class: 'btn btn-success' do %><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Gist<% end %>
-
-  <table>
-    <thead>
-      <tr>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @gists.each do |gist| %>
-        <tr>
-          <td><%= link_to 'Show', gist %></td>
-          <td><%= link_to 'Edit', edit_gist_path(gist) %></td>
-          <td><%= link_to 'Destroy', gist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
   <hr>
 
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div id='map' class='large'></div>
-      <script>
-      $( document ).ready(function() {
-          L.mapbox.accessToken = 'pk.eyJ1IjoibGV2ZW50aGFuIiwiYSI6IjNYYi1uMnMifQ.uQvHEvixml-zaHJZhb_WNQ';
-          var map = L.mapbox.map('map', 'mapbox.streets')
-              .setView([40, -74.50], 9);
-      });
-      </script>
-    </div>
-    <ul class="list-group">
-        <li class="list-group-item">
-          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Cras justo odio
-        </li>
-      </ul>
-  </div>
+  <% @gists.each do |gist| %>
+    <%= render 'gist', gist: gist %>
+    <tr>
+      <td><%= link_to 'Show', gist %></td>
+      <td><%= link_to 'Edit', edit_gist_path(gist) %></td>
+      <td><%= link_to 'Destroy', gist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
 </div>
+
+<script>
+$( document ).ready(function() {
+    L.mapbox.accessToken = 'pk.eyJ1IjoibGV2ZW50aGFuIiwiYSI6IjNYYi1uMnMifQ.uQvHEvixml-zaHJZhb_WNQ';
+    // TODO:
+});
+</script>

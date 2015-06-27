@@ -1,4 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+    <p id="notice"><%= notice %></p>
+    <div class="col-md-8 col-md-offset-2">
+        <h1>New Gist</h1>
+        <%= link_to 'Edit', edit_gist_path(@gist), class: 'btn btn-success' %>
+        <%= link_to 'Back', gists_path, class: 'btn btn-default' %>
+        <hr>
 
-<%= link_to 'Edit', edit_gist_path(@gist) %> |
-<%= link_to 'Back', gists_path %>
+        <%= render 'gist', gist: @gist %>
+    </div>
+</div>
+
+<script>
+    $( document ).ready(function() {
+        L.mapbox.accessToken = 'pk.eyJ1IjoibGV2ZW50aGFuIiwiYSI6IjNYYi1uMnMifQ.uQvHEvixml-zaHJZhb_WNQ';
+        var mapOptions = {
+            attributionControl: {compact: true}
+        }
+        var mapId = 'map-' + gon.gist.hex;
+        var map = L.mapbox.map(mapId, 'mapbox.streets', mapOptions)
+            .setView([40, -74.50], 2);
+
+        var geojson = gon.gist.content;
+        var featureLayer =  L.mapbox.featureLayer()
+            .setGeoJSON(geojson)
+            .addTo(map);
+        map.fitBounds(featureLayer.getBounds());
+    });
+</script>

@@ -2,8 +2,9 @@
 <html>
 <head>
   <title>Geogist</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= include_gon %>
+  <%= javascript_include_tag 'application' %>
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
   <%= csrf_meta_tags %>
 </head>

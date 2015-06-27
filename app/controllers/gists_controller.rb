@@ -49,6 +49,7 @@ class GistsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_gist
       @gist = Gist.find(params[:id])
+      gon.gist = @gist
     end
 
     # Only allow a trusted parameter "white list" through.
