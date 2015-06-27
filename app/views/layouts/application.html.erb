@@ -6,31 +6,42 @@
   <%= include_gon %>
   <%= javascript_include_tag 'application' %>
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
+  <!--[if lt IE 9]>
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
+  <![endif]-->
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <% flash.each do |type, content| %>
-              <% if content.respond_to?('each')
-                  content.each do |item| %>
-                      <%= render 'layouts/alert',
-                          type: type,
-                          content: item %>
-                  <% end %>
-              <% else %>
-                  <%= render 'layouts/alert',
-                          type: type,
-                          content: content %>
-              <% end %>
-          <% end %>
+  <div class="github-fork-ribbon-wrapper right">
+    <div class="github-fork-ribbon">
+      <a href="https://github.com/Leventhan/geogist">Fork me on GitHub</a>
+    </div>
+  </div>
 
-          <%= yield %>
-        </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <% flash.each do |type, content| %>
+            <% if content.respond_to?('each')
+                content.each do |item| %>
+                    <%= render 'layouts/alert',
+                        type: type,
+                        content: item %>
+                <% end %>
+            <% else %>
+                <%= render 'layouts/alert',
+                        type: type,
+                        content: content %>
+            <% end %>
+        <% end %>
+
+        <%= yield %>
+        <%= render 'layouts/footer' %>
       </div>
     </div>
-    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
-    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/geojson-extent/v0.0.1/geojson-extent.js'></script>
+  </div>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/geojson-extent/v0.0.1/geojson-extent.js'></script>
 </body>
 </html>
