@@ -9,6 +9,7 @@ gem 'activerecord-postgis-adapter'
 # Forms
 gem 'simple_form'
 gem 'bootsy'
+gem 'codemirror-rails'
 
 # Utility
 gem 'json'

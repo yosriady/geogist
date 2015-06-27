@@ -53,6 +53,6 @@ class GistsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def gist_params
-      params[:gist]
+      params[:gist].permit(:content, :description, :title)
     end
 end

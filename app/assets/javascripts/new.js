@@ -21,6 +21,10 @@ $( document ).ready(function() {
         successMessage();
     });
 
+    // Initialize CodeMirror
+    var myCodeMirror = CodeMirror.fromTextArea($("#gist_content"));
+
+
     // Helpers
     function successMessage(){
         $(document).trigger("clear-alerts");

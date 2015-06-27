@@ -16,7 +16,7 @@
             <%= f.input :content, as: :text, label: 'GeoJSON', input_html: { rows: 8 } %>
            </li>
            <li class="list-group-item">
-            <%= f.input :description, as: :bootsy, input_html: { rows: 5 } %>
+            <%= f.input :description, as: :bootsy, input_html: { rows: 5 }, editor_options: { alert_unsaved: false } %>
           </li>
         </ul>
         <div class="panel-footer">

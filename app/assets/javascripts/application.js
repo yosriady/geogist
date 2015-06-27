@@ -14,5 +14,6 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require jquery.bsAlerts.min.js
+//= require codemirror
 //= require bootsy
 //= require_tree .
