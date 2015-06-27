@@ -1,14 +1,8 @@
-<div class="row">
-    <p id="notice"><%= notice %></p>
-    <div class="col-md-8 col-md-offset-2">
-        <h1>New Gist</h1>
-        <%= link_to 'Edit', edit_gist_path(@gist), class: 'btn btn-success' %>
-        <%= link_to 'Back', gists_path, class: 'btn btn-default' %>
-        <hr>
+<h1>New Gist</h1>
+<%= link_to 'Back', gists_path, class: 'btn btn-default' %>
+<hr>
 
-        <%= render 'gist', gist: @gist %>
-    </div>
-</div>
+<%= render 'gist', gist: @gist %>
 
 <script>
     $( document ).ready(function() {
@@ -20,7 +14,7 @@
         var map = L.mapbox.map(mapId, 'mapbox.streets', mapOptions)
             .setView([40, -74.50], 2);
 
-        var geojson = gon.gist.content;
+        var geojson = $.parseJSON(gon.gist.content);
         var featureLayer =  L.mapbox.featureLayer()
             .setGeoJSON(geojson)
             .addTo(map);

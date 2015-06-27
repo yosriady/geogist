@@ -1,24 +1,31 @@
-<p id="notice"><%= notice %></p>
+<h1>Listing Gists</h1>
+<%= link_to new_gist_path, class: 'btn btn-success' do %><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Gist<% end %>
+<hr>
 
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-  <h1>Listing Gists</h1>
-  <%= link_to new_gist_path, class: 'btn btn-success' do %><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Gist<% end %>
-  <hr>
-
-  <% @gists.each do |gist| %>
-    <%= render 'gist', gist: gist %>
-    <tr>
-      <td><%= link_to 'Show', gist_path(gist.hex) %></td>
-      <td><%= link_to 'Edit', edit_gist_path(gist) %></td>
-      <td><%= link_to 'Destroy', gist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</div>
+<% @gists.each do |gist| %>
+  <%= render 'gist', gist: gist %>
+<% end %>
 
 <script>
 $( document ).ready(function() {
     L.mapbox.accessToken = 'pk.eyJ1IjoibGV2ZW50aGFuIiwiYSI6IjNYYi1uMnMifQ.uQvHEvixml-zaHJZhb_WNQ';
-    // TODO:
+    $.each(gon.gists, function(index, gist){
+      renderMap(gist);
+    });
+
+    function renderMap(gist){
+      var mapOptions = {
+          attributionControl: {compact: true}
+      }
+      var mapId = 'map-' + gist.hex;
+      var map = L.mapbox.map(mapId, 'mapbox.streets', mapOptions)
+          .setView([40, -74.50], 2);
+
+      var geojson = gist.content;
+      var featureLayer =  L.mapbox.featureLayer()
+          .setGeoJSON(geojson)
+          .addTo(map);
+      map.fitBounds(featureLayer.getBounds());
+    }
 });
 </script>

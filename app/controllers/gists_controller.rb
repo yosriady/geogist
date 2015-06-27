@@ -4,6 +4,10 @@ class GistsController < ApplicationController
   # GET /gists
   def index
     @gists = Gist.all
+    gon.gists = @gists
+    gon.gists.each do |gist|
+      gist.content = JSON(gist.content)
+    end
   end
 
   # GET /gists/1
@@ -24,7 +28,7 @@ class GistsController < ApplicationController
     @gist = Gist.new(gist_params)
 
     if @gist.save
-      redirect_to @gist, notice: 'Gist was successfully created.'
+      redirect_to gist_path(@gist.hex), notice: 'Gist was successfully created.'
     else
       render :new
     end
@@ -49,7 +53,9 @@ class GistsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_gist
       @gist = Gist.find_by(hex: params[:hex])
+      redirect_to gists_url, notice: 'Gist not found.' unless @gist
       gon.gist = @gist
+      gon.gist.content = JSON(gon.gist.content)
     end
 
     # Only allow a trusted parameter "white list" through.
